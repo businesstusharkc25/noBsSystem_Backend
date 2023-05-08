@@ -1,5 +1,16 @@
 import mongoose from "mongoose";
 
+const commentReplySchema = mongoose.Schema({
+  userAddress: { type: String, default: null },
+  comment: { type: String, default: null },
+});
+
+const commentSchema = mongoose.Schema({
+  userAddress: { type: String, default: null },
+  comment: { type: String, default: null },
+  replies: { type: [commentReplySchema], default: [] },
+});
+
 const contentSchema = mongoose.Schema({
   id: { type: Number, required: true },
   channelId: { type: mongoose.SchemaTypes.ObjectId, default: "" },
@@ -18,6 +29,7 @@ const contentSchema = mongoose.Schema({
   contentUrl: { type: String, default: null },
   contentFileName: { type: String, default: null },
   thumbnailFileName: { type: String, default: null },
+  comments: { type: [commentSchema], default: [] },
 });
 
 export default mongoose.model(

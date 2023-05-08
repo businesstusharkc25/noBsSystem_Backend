@@ -7,15 +7,17 @@ import userRouter from "./routes/userRoutes.js";
 import contentRouter from "./routes/contentRoutes.js";
 import membershipRouter from "./routes/membershipsRoutes.js";
 import channelRouter from "./routes/channelRoutes.js";
+import appRoutes from "./routes/appRoutes.js";
 
 dotEnv.config();
 
 const app = express();
-app.use(cors({ origin: process.env.LOCAL_CLIENT_URL }));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/user", userRouter);
+app.use("/app", appRoutes);
 app.use("/content", contentRouter);
 app.use("/membership", membershipRouter);
 app.use("/channel", channelRouter);

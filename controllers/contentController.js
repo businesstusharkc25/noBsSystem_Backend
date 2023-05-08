@@ -15,10 +15,13 @@ dotEnv.config();
 const addOrUpdateContent = async (req, isUpdate = false) => {
   try {
     // destructuring the values from request
+    const token = await req.headers.authorization.split(" ")[1];
     const parsedToken = parseJwt(token);
     const creatorAccountAddress = parsedToken?.result?.accountAddress;
     const creatorId = parsedToken?.result?._id;
     const channelId = parsedToken?.currentChannel?._id;
+
+    console.log("channelId", channelId);
 
     const {
       newsTitle,
@@ -47,6 +50,7 @@ const addOrUpdateContent = async (req, isUpdate = false) => {
       contentUrl: "",
       contentFileName: "",
       thumbnailFileName: "",
+      channelId,
     };
 
     if (contentId) {
